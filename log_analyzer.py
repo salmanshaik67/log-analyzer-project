@@ -22,8 +22,10 @@ def detect_threshold_anomalies(df, duration_threshold=10):
     return df
 
 # Clustering-based anomaly detection with DBSCAN
-def detect_cluster_anomalies(features_scaled, df):
-    model = DBSCAN(eps=0.5, min_samples=3)
+# def detect_cluster_anomalies(features_scaled, df):
+#     model = DBSCAN(eps=0.5, min_samples=3)
+def detect_cluster_anomalies(features_scaled, df, eps=0.5, min_samples=3):
+    model = DBSCAN(eps=eps, min_samples=min_samples)
     clusters = model.fit_predict(features_scaled)
     df['cluster'] = clusters
     df['cluster_anomaly'] = df['cluster'] == -1
